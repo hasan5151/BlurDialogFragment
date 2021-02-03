@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
@@ -15,7 +16,7 @@ import androidx.fragment.app.DialogFragment;
  * <p/>
  * All the screen behind the dialog will be blurred except the action bar.
  */
-public abstract class SupportBlurDialogFragment extends DialogFragment {
+public abstract class SupportBlurDialogFragment extends AppCompatDialogFragment {
 
     /**
      * Engine used to blur.
