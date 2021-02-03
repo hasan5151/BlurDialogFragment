@@ -1,39 +1,17 @@
-BlurDialogFragment
-==================
-
-This project allows to display DialogFragment with a burring effect behind. The blurring part is achieved through FastBlur algorithm thanks to the impressive work of Pavlo Dudka (cf [Special Thanks](https://github.com/tvbarthel/BlurDialogFragment/#special-thanks-to-)). 
-
-[![Maven Central](http://img.shields.io/maven-central/v/fr.tvbarthel.blurdialogfragment/lib.svg)](http://search.maven.org/#search%7Cga%7C1%7Cblurdialogfragment)
-
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-BlurDialogFragment-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1064)
-
-* [Sample app](#sample-app)
-* [Gradle dependency](#gradle-dependency)
-* [Example](#example)
-* [Use RenderScript in Your Project] (#use-renderscript-in-your-project)
-* [Simple usage using inheritance](#simple-usage-using-inheritance)
-* [Customize your blurring effect](#customize-your-blurring-effect)
-* [Avoiding inheritance](#avoiding-inheritance)
-* [Benchmark](#benchmark)
-* [Known bugs](#known-bugs)
-* [RenderScript or not RenderScript](#renderscript-or-not-renderscript)
-* [Change logs](#change-logs)
-* [Contributing](#contributing)
-* [Credits](#credits)
-* [License](#license)
-* [Special Thanks](#special-thanks-to-)
-
-Sample app
-=======
-[Download the sample app on the Google Play store.](https://play.google.com/store/apps/details?id=fr.tvbarthel.lib.blurdialogfragment.sample)
+Fork from https://github.com/tvbarthel/BlurDialogFragment but migrated to AndroidX
 
 Gradle dependency
 =======
-Since the library is promoted on maven central, just add a new gradle dependency :
-
-```groovy
-    compile 'fr.tvbarthel.blurdialogfragment:lib:2.2.0'
+It's on jitpack, so you'll need to add this to your root build.gradle:
 ```
+maven { url 'https://jitpack.io' }
+```
+
+And then in your app/build.gradle:
+
+````
+implementation 'com.github.amanzan:BlurDialogFragment:3.2.1'
+````
 
 Don't forget to check the [Use RenderScript in Your Project] (#use-renderscript-in-your-project) if you're planning to use it.
 
@@ -53,7 +31,7 @@ Simply add this line to your build.gradle
 ```groovy
 defaultConfig {
     ...
-    renderscriptTargetApi 22
+    renderscriptTargetApi 29
     renderscriptSupportModeEnabled true
     ...
 }
@@ -75,7 +53,7 @@ public class SampleDialogFragment extends BlurDialogFragment {
 }
 ```
 
-If you are using **android.support.v4.app.DialogFragment** : extends **SupportBlurDialogFragment**. 
+If you are using **androidx.appcompat.app.AppCompatDialogFragment** : extends **SupportBlurDialogFragment**. 
 Play with the blur radius and the down scale factor to obtain the perfect blur.
 
 Don't forget to enable log in order to keep on eye the performance.
@@ -286,24 +264,8 @@ Find more information on the [memory trace](http://tvbarthel.github.io/blur-dial
 
 Change logs
 =======
-* 2.2.0 : Fix preDrawListener registration when there was no certitude that onPreDraw will be called thanks to [Serkan Modoğlu](https://github.com/sekomod) and [Mark Mooibroek](https://github.com/markmooibroek) reports.
-* 2.1.6 : Fix orientation change as well as retainInstance thanks to [IskuhiSargsyan](https://github.com/IskuhiSargsyan) report and tweak FastBlur implementation to avoid the allocation of 3 additional arrays for RGB channels thanks to [sh1](https://disqus.com/by/sh1sh1sh1/) feedback.
-* 2.1.5 : Minor fixes thanks to [Edward S](https://github.com/edward-s) and [Tommy Chan](https://github.com/tommytcchan).
-* 2.1.4 : Fix NPE during the blurring process thanks to [Anth06ny](https://github.com/Anth06ny), [jacobtabak](https://github.com/jacobtabak) and [serega2593](https://github.com/serega2593) reports.
-* 2.1.3 : Remove unused resources thanks to [ligol](https://github.com/ligol) report.
-* 2.1.2 : Rework support of translucent status bar thanks to [wangsai-silence](https://github.com/wangsai-silence) report.
-* 2.1.1 : Fix usage without renderscript as VerifyError was fired.
-* 2.1.0 : Support AppCompatActivity and fix several bugs thanks to [jacobtabak](https://github.com/jacobtabak).
-* 2.0.1 : BlurEngine is back again (restore "avoiding inheritance" usage, thanks to [sergiopantoja](https://github.com/sergiopantoja) report).
-* 2.0.0 : Min SDK 9+, don't forget to check the above section "Use RenderScript in Your Project". (thanks to [ligol](https://github.com/ligol)).
-* 1.1.0 : Allow to use RenderScript (thank to [amasciul](https://github.com/amasciul)).
-* 1.0.0 : Animate blurring effect, support tablet, tweak nav bar offset and reduce memory allocation.
-* 0.1.2 : Fix bottom offset introduce by the navigation bar on Lollipop.
-* 0.1.1 : Fix top offset when using Toolbar.
-* 0.1.0 : Support appcompat-v7:21.
-* 0.0.9 : Change default blur radius (8) and default down scale factor (4).
-* 0.0.8 : Fix NoClassDefFound.
-* 0.0.7 : Avoid using inheritance through BlurDialogEngine if needed.
+* 3.2.1 : Class SupportBlurDialogFragment now extends AppCompatDialogFragment
+* 3.2.0 : Migrated to AndroidX and also added code from this PR in the original branch: https://github.com/tvbarthel/BlurDialogFragment/pull/77. Uploaded to Jitpack
 
 Contributing
 =======
