@@ -2,13 +2,14 @@ package fr.tvbarthel.lib.blurdialogfragment.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class SampleActionBarActivity extends AppCompatActivity implements View.OnClickListener {

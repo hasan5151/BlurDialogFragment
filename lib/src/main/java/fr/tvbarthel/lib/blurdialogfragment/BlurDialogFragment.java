@@ -7,8 +7,9 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
+
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * Encapsulate dialog behavior with blur effect for app using {@link android.app.DialogFragment}.

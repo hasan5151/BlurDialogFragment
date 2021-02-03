@@ -16,10 +16,6 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -31,6 +27,10 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * Encapsulate the whole behaviour to provide a blur effect on a DialogFragment.
@@ -392,9 +392,7 @@ public class BlurDialogEngine {
             overlay = Bitmap.createBitmap((int) width, (int) height, Bitmap.Config.RGB_565);
         }
         try {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB
-                || mHoldingActivity instanceof ActionBarActivity
-                || mHoldingActivity instanceof AppCompatActivity) {
+            if (mHoldingActivity instanceof AppCompatActivity) {
                 //add offset as top margin since actionBar height must also considered when we display
                 // the blurred background. Don't want to draw on the actionBar.
                 mBlurredBackgroundLayoutParams.setMargins(0, actionBarHeight, 0, 0);
@@ -455,31 +453,15 @@ public class BlurDialogEngine {
         try {
             if (mToolbar != null) {
                 actionBarHeight = mToolbar.getHeight();
-            } else if (mHoldingActivity instanceof ActionBarActivity) {
-                ActionBar supportActionBar
-                    = ((ActionBarActivity) mHoldingActivity).getSupportActionBar();
-                if (supportActionBar != null) {
-                    actionBarHeight = supportActionBar.getHeight();
-                }
             } else if (mHoldingActivity instanceof AppCompatActivity) {
                 ActionBar supportActionBar
                     = ((AppCompatActivity) mHoldingActivity).getSupportActionBar();
                 if (supportActionBar != null) {
                     actionBarHeight = supportActionBar.getHeight();
                 }
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                android.app.ActionBar actionBar = mHoldingActivity.getActionBar();
-                if (actionBar != null) {
-                    actionBarHeight = actionBar.getHeight();
-                }
             }
         } catch (NoClassDefFoundError e) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                android.app.ActionBar actionBar = mHoldingActivity.getActionBar();
-                if (actionBar != null) {
-                    actionBarHeight = actionBar.getHeight();
-                }
-            }
+
         }
         return actionBarHeight;
     }
@@ -589,7 +571,7 @@ public class BlurDialogEngine {
         @Override
         protected Void doInBackground(Void... params) {
             //process to the blue
-            if (!isCancelled()) {
+            if (!isCancelled() && !mBackground.isRecycled()) {
                 blur(mBackground, mBackgroundView);
             } else {
                 return null;
@@ -607,20 +589,21 @@ public class BlurDialogEngine {
             mBackgroundView.destroyDrawingCache();
             mBackgroundView.setDrawingCacheEnabled(false);
 
-            mHoldingActivity.getWindow().addContentView(
-                mBlurredBackgroundView,
-                mBlurredBackgroundLayoutParams
-            );
+            if (mBlurredBackgroundView != null) {
+                mHoldingActivity.getWindow().addContentView(
+                        mBlurredBackgroundView,
+                        mBlurredBackgroundLayoutParams
+                );
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
                 mBlurredBackgroundView.setAlpha(0f);
                 mBlurredBackgroundView
-                    .animate()
-                    .alpha(1f)
-                    .setDuration(mAnimationDuration)
-                    .setInterpolator(new LinearInterpolator())
-                    .start();
+                        .animate()
+                        .alpha(1f)
+                        .setDuration(mAnimationDuration)
+                        .setInterpolator(new LinearInterpolator())
+                        .start();
             }
+
             mBackgroundView = null;
             mBackground = null;
         }

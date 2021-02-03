@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
 /**
  * Encapsulate dialog behavior with blur effect for
- * app using {@link android.support.v4.app.DialogFragment}.
+ * app using {@link DialogFragment}.
  * <p/>
  * All the screen behind the dialog will be blurred except the action bar.
  */
