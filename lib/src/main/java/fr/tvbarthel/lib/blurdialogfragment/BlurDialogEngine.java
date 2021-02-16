@@ -11,6 +11,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
@@ -134,6 +136,11 @@ public class BlurDialogEngine {
      * Boolean used to know if RenderScript should be used
      */
     private boolean mUseRenderScript;
+
+    /**
+     * Int used to set color for
+     */
+    private int mColor = Color.TRANSPARENT;
 
     /**
      * Constructor.
@@ -311,6 +318,14 @@ public class BlurDialogEngine {
     }
 
     /**
+     * Background blur Color.
+     * @param color
+     */
+    public void setColor(int color) {
+        mColor = color;
+    }
+
+    /**
      * Set a toolbar which isn't set as action bar.
      *
      * @param toolbar toolbar.
@@ -405,7 +420,9 @@ public class BlurDialogEngine {
         //scale and draw background view on the canvas overlay
         Canvas canvas = new Canvas(overlay);
         Paint paint = new Paint();
-        paint.setFlags(Paint.FILTER_BITMAP_FLAG);
+        paint.setFlags(Paint.FILTER_BITMAP_FLAG | Paint.ANTI_ALIAS_FLAG);
+        PorterDuffColorFilter filter = new PorterDuffColorFilter(mColor, PorterDuff.Mode.SRC_ATOP);
+        paint.setColorFilter(filter);
 
         //build drawing destination boundaries
         final RectF destRect = new RectF(0, 0, overlay.getWidth(), overlay.getHeight());

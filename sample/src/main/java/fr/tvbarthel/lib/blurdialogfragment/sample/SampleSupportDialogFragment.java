@@ -3,6 +3,7 @@ package fr.tvbarthel.lib.blurdialogfragment.sample;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -162,5 +163,10 @@ public class SampleSupportDialogFragment extends SupportBlurDialogFragment {
     @Override
     protected boolean isRenderScriptEnable() {
         return mUseRenderScript;
+    }
+
+    @Override
+    protected int getColor() {
+        return Color.parseColor("#33429171");
     }
 }

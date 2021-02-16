@@ -3,6 +3,7 @@ package fr.tvbarthel.lib.blurdialogfragment;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.WindowManager;
 
@@ -68,6 +69,8 @@ public abstract class SupportBlurDialogFragment extends AppCompatDialogFragment 
         mBlurEngine.debug(isDebugEnable());
 
         mBlurEngine.setBlurActionBar(isActionBarBlurred());
+
+        mBlurEngine.setColor(getColor());
 
         mDimmingEffect = isDimmingEnable();
     }
@@ -218,6 +221,19 @@ public abstract class SupportBlurDialogFragment extends AppCompatDialogFragment 
      */
     protected boolean isRenderScriptEnable() {
         return BlurDialogEngine.DEFAULT_USE_RENDERSCRIPT;
+    }
+
+    /**
+     * For inheritance purpose.
+     * <p/>
+     * Set Background blur Color.
+     * <p/>
+     * By default [Color.TRANSPARENT].
+     *
+     * @return int to set the blur blur background color.
+     */
+    protected int getColor() {
+        return Color.TRANSPARENT;
     }
 
 }
