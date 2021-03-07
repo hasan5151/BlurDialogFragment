@@ -1,6 +1,9 @@
 package fr.tvbarthel.lib.blurdialogfragment.sample;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +13,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 
 public class SampleActionBarActivity extends AppCompatActivity implements View.OnClickListener {
@@ -64,12 +68,42 @@ public class SampleActionBarActivity extends AppCompatActivity implements View.O
      */
     private CheckBox mUseRenderScript;
 
+
+    /**
+     * View used to change blur background color.
+     */
+    private View cbWhite, cbGrey, cbYellow, cbRed, cbOrange, cbBlue, cbGreen, cbPurple;
+
+    /**
+     * Int used for blur background color
+     */
+    private int mColor = Color.TRANSPARENT;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
 
         findViewById(R.id.button).setOnClickListener(this);
+
+        cbWhite = findViewById(R.id.cbWhite);
+        cbGrey = findViewById(R.id.cbGrey);
+        cbYellow = findViewById(R.id.cbYellow);
+        cbRed = findViewById(R.id.cbRed);
+        cbOrange = findViewById(R.id.cbOrange);
+        cbBlue = findViewById(R.id.cbBlue);
+        cbGreen = findViewById(R.id.cbGreen);
+        cbPurple = findViewById(R.id.cbPurple);
+
+        cbWhite.setOnClickListener(this);
+        cbGrey.setOnClickListener(this);
+        cbYellow.setOnClickListener(this);
+        cbRed.setOnClickListener(this);
+        cbOrange.setOnClickListener(this);
+        cbBlue.setOnClickListener(this);
+        cbGreen.setOnClickListener(this);
+        cbPurple.setOnClickListener(this);
+
         mBlurRadiusTextView = ((TextView) findViewById(R.id.blurRadius));
         mBlurRadiusSeekbar = ((SeekBar) findViewById(R.id.blurRadiusSeekbar));
         mDownScaleFactorTextView = ((TextView) findViewById(R.id.downScalefactor));
@@ -104,11 +138,14 @@ public class SampleActionBarActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
+        GradientDrawable drawable = (GradientDrawable) ContextCompat.getDrawable(this, R.drawable.bg_color_state);
+        drawable.setStroke(2, ContextCompat.getColor(this, R.color.black));
         switch (v.getId()) {
             case R.id.button:
                 SampleSupportDialogFragment fragment
                     = SampleSupportDialogFragment.newInstance(
                     mBlurRadiusSeekbar.getProgress() + 1,
+                        mColor,
                     (mDownScaleFactorSeekbar.getProgress() / 10f) + 2,
                     mDimmingEnable.isChecked(),
                     mDebugMode.isChecked(),
@@ -117,9 +154,66 @@ public class SampleActionBarActivity extends AppCompatActivity implements View.O
                 );
                 fragment.show(getSupportFragmentManager(), "blur_sample");
                 break;
+            case R.id.cbWhite:
+                setBlurBackgroundColor(android.R.color.transparent);
+                drawable.setColor(mColor);
+                cbWhite.setBackground(drawable);
+                break;
+            case R.id.cbGrey:
+                setBlurBackgroundColor(R.color.transparent_grey);
+                drawable.setColor(mColor);
+                cbGrey.setBackground(drawable);
+                break;
+            case R.id.cbYellow:
+                setBlurBackgroundColor(R.color.transparent_yellow);
+                drawable.setColor(mColor);
+                cbYellow.setBackground(drawable);
+                break;
+            case R.id.cbRed:
+                setBlurBackgroundColor(R.color.transparent_red);
+                drawable.setColor(mColor);
+                cbRed.setBackground(drawable);
+                break;
+            case R.id.cbOrange:
+                setBlurBackgroundColor(R.color.transparent_orange);
+                drawable.setColor(mColor);
+                cbOrange.setBackground(drawable);
+                break;
+            case R.id.cbBlue:
+                setBlurBackgroundColor(R.color.transparent_cyan);
+                drawable.setColor(mColor);
+                cbBlue.setBackground(drawable);
+                break;
+            case R.id.cbGreen:
+                setBlurBackgroundColor(R.color.transparent_light_green);
+                drawable.setColor(mColor);
+                cbGreen.setBackground(drawable);
+                break;
+            case R.id.cbPurple:
+                setBlurBackgroundColor(R.color.transparent_purple);
+                drawable.setColor(mColor);
+                cbPurple.setBackground(drawable);
+                break;
             default:
                 break;
         }
+    }
+
+    private void setBlurBackgroundColor(int color) {
+        mColor = ContextCompat.getColor(this, color);
+
+        GradientDrawable drawable = (GradientDrawable) ContextCompat.getDrawable(this, R.drawable.bg_color_state);
+        drawable.setStroke(2, ContextCompat.getColor(this, R.color.black));
+        drawable.setColor(ContextCompat.getColor(this, android.R.color.transparent));
+
+        cbWhite.setBackground(drawable);
+        cbGrey.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent_grey));
+        cbYellow.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent_yellow));
+        cbRed.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent_red));
+        cbOrange.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent_orange));
+        cbBlue.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent_cyan));
+        cbGreen.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent_light_green));
+        cbPurple.setBackgroundColor(ContextCompat.getColor(this, R.color.transparent_purple));
     }
 
     /**

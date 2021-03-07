@@ -12,5 +12,6 @@
     <string name="activity_sample_blur_dimming">Dimming enable</string>
     <string name="activity_sample_actionbar_blurred">Apply blur effect on action bar</string>
     <string name="activity_sample_blur_userendercript">Use RenderScript if possible</string>
+    <string name="activity_sample_blur_background_color">Select Blur Background color</string>
 
 </resources>

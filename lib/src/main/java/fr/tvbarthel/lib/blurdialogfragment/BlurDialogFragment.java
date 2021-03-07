@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -71,6 +72,8 @@ public abstract class BlurDialogFragment extends DialogFragment {
         mBlurEngine.setBlurActionBar(isActionBarBlurred());
 
         mDimmingEffect = isDimmingEnable();
+
+        mBlurEngine.setColor(getColor());
     }
 
     @Override
@@ -219,5 +222,18 @@ public abstract class BlurDialogFragment extends DialogFragment {
      */
     protected boolean isRenderScriptEnable() {
         return BlurDialogEngine.DEFAULT_USE_RENDERSCRIPT;
+    }
+
+    /**
+     * For inheritance purpose.
+     * <p/>
+     * Set Background blur Color.
+     * <p/>
+     * By default [Color.TRANSPARENT].
+     *
+     * @return int to set the blur blur background color.
+     */
+    protected int getColor() {
+        return Color.TRANSPARENT;
     }
 }
