@@ -120,6 +120,12 @@ public class SampleDialogFragment extends BlurDialogFragment {
         // False by default.
         return true;
     }
+    
+    @Override
+    protected int getColor() {
+        // Allow to customize the blur background color.
+        return Color.TRANSPARENT;
+    }
     ...
 ```
 
@@ -155,6 +161,10 @@ static final boolean DEFAULT_ACTION_BAR_BLUR = false;
  * Default use of RenderScript.
  */
 static final boolean DEFAULT_USE_RENDERSCRIPT = false;
+/**
+* Color used to blur the background
+*/
+private int mColor = Color.TRANSPARENT;
 ```
 
 Avoiding inheritance
@@ -184,6 +194,7 @@ public class SampleDialogFragment extends MyCustomDialogFragment {
         mBlurEngine.debug(true);
         mBlurEngine.setBlurActionBar(true);
         mBlurEngine.setUseRenderScript(true);
+        mBlurEngine.setColor(Color.TRANSPARENT);
     }
     
     @Override
