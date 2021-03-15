@@ -40,8 +40,13 @@ public class SampleDialogFragment extends BlurDialogFragment {
      * Bundle key used to start the blur dialog with a given debug policy.
      */
     private static final String BUNDLE_KEY_DEBUG = "bundle_key_debug_effect";
+    /**
+     * Bundle key used for blur background color
+     */
+    public static final String BUNDLE_KEY_BLUR_BACKGROUND_COLOR = "bundle_key_background_color";
 
     private int mRadius;
+    private int mColor;
     private float mDownScaleFactor;
     private boolean mDimming;
     private boolean mDebug;
@@ -56,6 +61,7 @@ public class SampleDialogFragment extends BlurDialogFragment {
      * @return well instantiated fragment.
      */
     public static SampleDialogFragment newInstance(int radius,
+                                                   int color,
                                                    float downScaleFactor,
                                                    boolean dimming,
                                                    boolean debug) {
@@ -64,6 +70,10 @@ public class SampleDialogFragment extends BlurDialogFragment {
         args.putInt(
                 BUNDLE_KEY_BLUR_RADIUS,
                 radius
+        );
+        args.putInt(
+                BUNDLE_KEY_BLUR_BACKGROUND_COLOR,
+                color
         );
         args.putFloat(
                 BUNDLE_KEY_DOWN_SCALE_FACTOR,
@@ -89,6 +99,7 @@ public class SampleDialogFragment extends BlurDialogFragment {
 
         Bundle args = getArguments();
         mRadius = args.getInt(BUNDLE_KEY_BLUR_RADIUS);
+        mColor = args.getInt(BUNDLE_KEY_BLUR_BACKGROUND_COLOR);
         mDownScaleFactor = args.getFloat(BUNDLE_KEY_DOWN_SCALE_FACTOR);
         mDimming = args.getBoolean(BUNDLE_KEY_DIMMING);
         mDebug = args.getBoolean(BUNDLE_KEY_DEBUG);
@@ -134,5 +145,10 @@ public class SampleDialogFragment extends BlurDialogFragment {
     @Override
     protected int getBlurRadius() {
         return mRadius;
+    }
+
+    @Override
+    protected int getColor() {
+        return mColor;
     }
 }

@@ -3,6 +3,7 @@ package fr.tvbarthel.lib.blurdialogfragment.sample;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -48,7 +49,13 @@ public class SampleSupportDialogFragment extends SupportBlurDialogFragment {
      */
     private static final String BUNDLE_KEY_USE_RENDERSCRIPT = "bundle_key_use_renderscript";
 
+    /**
+     * Bundle key used for blur background color
+     */
+    public static final String BUNDLE_KEY_BLUR_BACKGROUND_COLOR = "bundle_key_background_color";
+
     private int mRadius;
+    private int mColor;
     private float mDownScaleFactor;
     private boolean mDimming;
     private boolean mDebug;
@@ -67,6 +74,7 @@ public class SampleSupportDialogFragment extends SupportBlurDialogFragment {
      * @return well instantiated fragment.
      */
     public static SampleSupportDialogFragment newInstance(int radius,
+                                                          int color,
                                                           float downScaleFactor,
                                                           boolean dimming,
                                                           boolean debug,
@@ -77,6 +85,10 @@ public class SampleSupportDialogFragment extends SupportBlurDialogFragment {
         args.putInt(
                 BUNDLE_KEY_BLUR_RADIUS,
                 radius
+        );
+        args.putInt(
+                BUNDLE_KEY_BLUR_BACKGROUND_COLOR,
+                color
         );
         args.putFloat(
                 BUNDLE_KEY_DOWN_SCALE_FACTOR,
@@ -110,6 +122,7 @@ public class SampleSupportDialogFragment extends SupportBlurDialogFragment {
 
         Bundle args = getArguments();
         mRadius = args.getInt(BUNDLE_KEY_BLUR_RADIUS);
+        mColor = args.getInt(BUNDLE_KEY_BLUR_BACKGROUND_COLOR);
         mDownScaleFactor = args.getFloat(BUNDLE_KEY_DOWN_SCALE_FACTOR);
         mDimming = args.getBoolean(BUNDLE_KEY_DIMMING);
         mDebug = args.getBoolean(BUNDLE_KEY_DEBUG);
@@ -162,5 +175,10 @@ public class SampleSupportDialogFragment extends SupportBlurDialogFragment {
     @Override
     protected boolean isRenderScriptEnable() {
         return mUseRenderScript;
+    }
+
+    @Override
+    protected int getColor() {
+        return mColor;
     }
 }

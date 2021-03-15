@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="transparent_grey">#AA666666</color>
     <color name="action_bar">#3ca7b5</color>
+
+    <color name="black">#000000</color>
+    <color name="transparent_grey">#33C7C7C7</color>
+    <color name="transparent_red">#33D50000</color>
+    <color name="transparent_purple">#33AA00FF</color>
+    <color name="transparent_cyan">#3300B8D4</color>
+    <color name="transparent_light_green">#3364DD17</color>
+    <color name="transparent_yellow">#33FFD600</color>
+    <color name="transparent_orange">#33FF6D00</color>
+    <color name="transparent_deep_orange">#33DD2600</color>
+
 </resources>

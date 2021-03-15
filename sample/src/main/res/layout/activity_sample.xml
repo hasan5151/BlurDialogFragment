@@ -55,6 +55,80 @@
                 android:id="@+id/blurRadiusSeekbar"
                 android:max="20" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/activity_sample_blur_background_color"
+                android:gravity="start"
+                android:textColor="@color/secondary_text_default_material_light"
+                android:id="@+id/blurBackgroungColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/cbWhite"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_color_state" />
+
+
+                <View
+                    android:id="@+id/cbGrey"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/transparent_grey" />
+
+                <View
+                    android:id="@+id/cbYellow"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/transparent_yellow" />
+
+                <View
+                    android:id="@+id/cbRed"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/transparent_red" />
+
+                <View
+                    android:id="@+id/cbOrange"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/transparent_orange" />
+
+                <View
+                    android:id="@+id/cbBlue"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/transparent_cyan" />
+
+                <View
+                    android:id="@+id/cbGreen"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/transparent_light_green" />
+
+                <View
+                    android:id="@+id/cbPurple"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/transparent_purple" />
+
+            </LinearLayout>
+
             <CheckBox
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
