@@ -10,7 +10,7 @@ maven { url 'https://jitpack.io' }
 And then in your app/build.gradle:
 
 ````
-implementation 'com.github.amanzan:BlurDialogFragment:3.2.2'
+implementation 'com.github.amanzan:BlurDialogFragment:3.3.1'
 ````
 
 Don't forget to check the [Use RenderScript in Your Project] (#use-renderscript-in-your-project) if you're planning to use it.
